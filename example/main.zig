@@ -22,7 +22,7 @@ export fn init() void {
 export fn loop() void {
     led_state = !led_state;
     c.cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, led_state);
-    c.sleep_ms(350);
+    c.sleep_ms(100);
 
     if (led_state == false) {
         std.log.info("Blink! {d}", .{total_blinks});

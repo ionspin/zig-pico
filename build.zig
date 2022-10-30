@@ -19,12 +19,12 @@ pub fn build(b: *std.build.Builder) void {
         picosdk.hardware_pio,
     });
 
-    pico_app.addPioSources(&.{
-        "example/blink.pio",
-    });
+    // pico_app.addPioSources(&.{
+    //     "example/blink.pio",
+    // });
 
     pico_app.zig.setBuildMode(mode);
-    pico_app.enable_stdio(.usb);
+    pico_app.enable_stdio(.uart_usb);
     pico_app.install();
 }
 

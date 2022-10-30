@@ -58,7 +58,6 @@ fn allSdkIncludeDirs(allocator: std.mem.Allocator) !std.ArrayList([]const u8) {
         "lib/tinyusb/src",
         "lib/lwip/src/include",
         "test/kitchen_sink",
-        "src/common/pico_stdlib/include/pico",
     }) |path| {
         const absolute_path = try std.mem.concat(allocator, u8, &.{
             pico_sdk_path,
@@ -125,7 +124,7 @@ pub const IncludeStep = struct {
         defer allocator.free(generated);
         self.zig.addSystemIncludePath(generated);
         self.zig.addIncludePath(self.cmakelists.build_dir.?);
-        self.zig.addSystemIncludePath("/usr/lib/arm-none-eabi/include");
+        self.zig.addSystemIncludePath("/usr/arm-none-eabi/include/");
 
         switch (self.board) {
             .pico_w => |config| {
@@ -146,6 +145,7 @@ pub const IncludeStep = struct {
             },
             .pico => |_| {},
         }
+        std.log.debug("IncludeStep make DONE", .{});
     }
 };
 
